@@ -2,23 +2,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = 2300;
 
 
 app.use(bodyParser.json());
 
 let tasks = [
-  { id: 1, name: 'Task 1', description: 'Description for Task 1', status: 'Incomplete' },
-  { id: 2, name: 'Task 2', description: 'Description for Task 2', status: 'Complete' }
+  { id: 1, name: 'Venki', description: 'Full Stack Web Developer', status: 'Incomplete' },
+  { id: 2, name: 'Geetha', description: 'Housewife', status: 'Complete' },
+  { id: 3, name: 'Teja', description: 'Studying 1st standard', status: 'Incomplete' },
+  { id: 4, name: 'Aswin', description: 'Studying Pre-KG', status: 'Complete' }
 ];
 
 
-app.get('/tasks', (req, res) => {
+app.get('/', (req, res) => {
   res.json(tasks);
 });
 
 
-app.get('/tasks/:id', (req, res) => {
+app.get('/', (req, res) => {
   const taskId = parseInt(req.params.id);
   const task = tasks.find(t => t.id === taskId);
 
@@ -30,7 +32,7 @@ app.get('/tasks/:id', (req, res) => {
 });
 
 
-app.post('/tasks', (req, res) => {
+app.post('/', (req, res) => {
   const { name, description, status } = req.body;
 
   if (!name || !description || !status) {
@@ -49,7 +51,7 @@ app.post('/tasks', (req, res) => {
 });
 
 
-app.put('/tasks/:id', (req, res) => {
+app.put('/', (req, res) => {
   const taskId = parseInt(req.params.id);
   const taskIndex = tasks.findIndex(t => t.id === taskId);
 
@@ -75,7 +77,7 @@ app.put('/tasks/:id', (req, res) => {
 });
 
 
-app.delete('/tasks/:id', (req, res) => {
+app.delete('/', (req, res) => {
   const taskId = parseInt(req.params.id);
   tasks = tasks.filter(t => t.id !== taskId);
   res.json({ message: 'Task deleted successfully' });
